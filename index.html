@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClipForge - Shorts Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>ClipForge</h1>
+        <p class="subtitle">One system for creating daily niche videos on autopilot: variants + AI video production plans.</p>
+      </header>
+
+      <section class="card">
+        <h2>Autopilot Planner</h2>
+        <div class="controls">
+          <label>
+            Niche
+            <input id="niche" type="text" placeholder="e.g., Fitness coaches, Real estate, AI tools" />
+          </label>
+          <label>
+            Days to plan
+            <select id="planDays">
+              <option value="7" selected>7 days</option>
+              <option value="14">14 days</option>
+              <option value="30">30 days</option>
+            </select>
+          </label>
+        </div>
+        <div class="actions">
+          <button id="buildAutopilot" type="button">Build daily plan</button>
+          <button id="copyAutopilot" class="ghost" type="button">Copy plan</button>
+        </div>
+        <div id="autopilotOutput" class="autopilot hidden"></div>
+      </section>
+
+      <section class="card">
+        <label for="idea">Source text / idea</label>
+        <textarea id="idea" rows="8" placeholder="Paste notes, article snippet, product details, or a topic prompt..."></textarea>
+
+        <div class="controls">
+          <label>
+            Platform
+            <select id="platform">
+              <option value="tiktok">TikTok</option>
+              <option value="reels">Instagram Reels</option>
+              <option value="shorts">YouTube Shorts</option>
+              <option value="linkedin">LinkedIn</option>
+            </select>
+          </label>
+
+          <label>
+            Template
+            <select id="templateMode">
+              <option value="educational" selected>Educational Explainer</option>
+              <option value="story">Story Hook</option>
+              <option value="problem">Problem/Solution</option>
+              <option value="authority">Authority/Proof</option>
+            </select>
+          </label>
+
+          <label>
+            Tone
+            <select id="tone">
+              <option value="energetic">Energetic</option>
+              <option value="educational">Educational</option>
+              <option value="storytelling">Storytelling</option>
+              <option value="professional">Professional</option>
+            </select>
+          </label>
+
+          <label>
+            Duration
+            <select id="duration">
+              <option value="15">15 seconds</option>
+              <option value="30" selected>30 seconds</option>
+              <option value="45">45 seconds</option>
+              <option value="60">60 seconds</option>
+            </select>
+          </label>
+
+          <label>
+            Audience
+            <input id="audience" type="text" placeholder="e.g., Coaches, SMB founders" />
+          </label>
+
+          <label>
+            Primary CTA
+            <input id="cta" type="text" placeholder="e.g., Follow for part 2" />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="generate">Generate 3 Variants</button>
+          <button id="download" class="ghost" type="button">Download JSON</button>
+        </div>
+      </section>
+
+      <section id="output" class="card hidden">
+        <div class="output-head">
+          <h2>Generated Shorts Kit</h2>
+          <button id="copyAll" class="ghost" type="button">Copy all</button>
+        </div>
+
+        <div id="variants" class="variants"></div>
+      </section>
+
+      <section id="aiVideo" class="card hidden">
+        <div class="output-head">
+          <h2>AI Video Generator</h2>
+          <p class="tiny">Use your API key client-side (never stored).</p>
+        </div>
+
+        <div class="controls">
+          <label>
+            OpenAI API key
+            <input id="apiKey" type="password" placeholder="sk-..." autocomplete="off" />
+          </label>
+          <label>
+            Model
+            <select id="aiModel">
+              <option value="gpt-4.1-mini" selected>gpt-4.1-mini</option>
+              <option value="gpt-4.1">gpt-4.1</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="generateAiVideo" type="button">Generate AI Video Plan</button>
+          <button id="buildScenes" class="ghost" type="button">AI Image/Video Scenes</button>
+          <button id="buildComposition" class="ghost" type="button">Build Composition JSON</button>
+          <button id="generateVideo" type="button">Manual Generate Video</button>
+        </div>
+        <p id="aiStatus" class="tiny"></p>
+        <pre id="aiResult" class="ai-result"></pre>
+      </section>
+
+      <section id="videoDashboard" class="card hidden">
+        <div class="output-head">
+          <h2>Video Render Dashboard</h2>
+          <p id="renderStatus" class="tiny">Ready</p>
+        </div>
+
+        <div id="pipelineSteps" class="pipeline"></div>
+
+        <div class="preview-grid">
+          <div>
+            <h3>Preview</h3>
+            <div id="previewCard" class="preview-card"></div>
+          </div>
+          <div>
+            <h3>Rendered Payload</h3>
+            <pre id="renderJson" class="ai-result"></pre>
+          </div>
+        </div>
+      </section>
+
+
+
+      <section id="analytics" class="card hidden">
+        <div class="output-head">
+          <h2>Performance Analytics</h2>
+          <p class="tiny">Auto-optimization uses these metrics.</p>
+        </div>
+
+        <div id="analyticsGrid" class="publish-grid"></div>
+        <div class="actions">
+          <button id="optimizeFromPerformance" type="button">Auto-optimize next video</button>
+        </div>
+      </section>
+
+      <section id="distribution" class="card hidden">
+        <div class="output-head">
+          <h2>Distribution</h2>
+          <p id="approvalStatus" class="tiny">Status: Draft</p>
+        </div>
+
+        <div class="controls">
+          <label>
+            Schedule Date/Time
+            <input id="scheduleAt" type="datetime-local" />
+          </label>
+          <label>
+            Reviewer
+            <input id="reviewer" type="text" placeholder="e.g., content.lead@team.com" />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="requestApproval" type="button">Request approval</button>
+          <button id="approveContent" class="ghost" type="button">Approve</button>
+          <button id="rejectContent" class="ghost" type="button">Reject</button>
+        </div>
+
+        <div class="publish-grid">
+          <article class="publish-card">
+            <h3>YouTube</h3>
+            <p id="ytState" class="tiny">Not scheduled</p>
+            <button id="publishYouTube" type="button">Publish to YouTube</button>
+          </article>
+          <article class="publish-card">
+            <h3>Instagram</h3>
+            <p id="igState" class="tiny">Not scheduled</p>
+            <button id="publishInstagram" type="button">Publish to Instagram</button>
+          </article>
+          <article class="publish-card">
+            <h3>TikTok</h3>
+            <p id="ttState" class="tiny">Not scheduled</p>
+            <button id="publishTikTok" type="button">Publish to TikTok</button>
+          </article>
+        </div>
+      </section>
+    </main>
+
+
+    <template id="variant-template">
+      <article class="variant">
+        <h3 class="variant-title"></h3>
+        <p class="variant-hook"></p>
+
+        <div class="result">
+          <h4>Shot List</h4>
+          <ol class="variant-script"></ol>
+        </div>
+
+        <div class="result">
+          <h4>Caption</h4>
+          <p class="variant-caption"></p>
+        </div>
+
+        <div class="result">
+          <h4>Hashtags</h4>
+          <p class="variant-tags"></p>
+        </div>
+
+        <button class="copy-variant ghost" type="button">Copy variant</button>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>

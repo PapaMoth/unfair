@@ -1,0 +1,10 @@
+# Environment files
+.env*
+
+# Node dependencies
+node_modules/
+
+# Build outputs
+.next/
+dist/
+coverage/

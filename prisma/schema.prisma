@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Channel {
+  id               String   @id @default(cuid())
+  name             String
+  niche            String
+  platform         String
+  approvalRequired Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  videos           Video[]
+}
+
+model Video {
+  id            String      @id @default(cuid())
+  channelId     String
+  title         String?
+  topic         String?
+  hook          String?
+  scriptText    String?
+  status        VideoStatus @default(PENDING)
+  finalVideoUrl String?
+  thumbnailUrl  String?
+  subtitlesUrl  String?
+  createdAt     DateTime    @default(now())
+  channel       Channel     @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  scenes        Scene[]
+}
+
+model Scene {
+  id              String   @id @default(cuid())
+  videoId         String
+  sceneIndex      Int
+  durationSeconds Int
+  captionText     String
+  voiceoverText   String
+  assetUrl        String?
+  video           Video    @relation(fields: [videoId], references: [id], onDelete: Cascade)
+
+  @@index([videoId, sceneIndex])
+}
+
+enum VideoStatus {
+  PENDING
+  PROCESSING
+  RENDERED
+  PUBLISHED
+  FAILED
+}
