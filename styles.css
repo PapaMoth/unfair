@@ -1,0 +1,130 @@
+:root {
+  color-scheme: dark;
+  --bg: #090d1f;
+  --card: #121935;
+  --text: #edf0ff;
+  --muted: #a3add8;
+  --line: #27335d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(circle at top, #1e2f72 0%, var(--bg) 42%);
+  color: var(--text);
+}
+
+.container {
+  width: min(1100px, 95vw);
+  margin: 2rem auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.subtitle { color: var(--muted); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+textarea,
+select,
+input,
+button {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #324074;
+  background: #0d1330;
+  color: var(--text);
+  padding: 0.65rem;
+  font-size: 0.95rem;
+}
+
+textarea { margin-top: 0.5rem; }
+
+.controls {
+  margin-top: 0.75rem;
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.actions {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+
+button {
+  cursor: pointer;
+  font-weight: 600;
+  background: linear-gradient(135deg, #5f77ff, #50c5ff);
+  color: #0a1129;
+  border: none;
+}
+
+button.ghost {
+  background: transparent;
+  color: #b3c4ff;
+  border: 1px solid #41518b;
+}
+
+button:hover { filter: brightness(1.1); }
+
+.hidden { display: none; }
+
+.output-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.variants {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.variant {
+  border: 1px solid #2d3969;
+  border-radius: 10px;
+  padding: 0.8rem;
+  background: #0d1430;
+}
+
+.variant-title,
+.variant h4 {
+  margin: 0 0 0.4rem;
+}
+
+.variant-hook {
+  margin-top: 0;
+  color: #96b5ff;
+}
+
+.variant-script {
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.variant-tags {
+  color: #9cd5ff;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .output-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
