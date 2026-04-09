@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClipForge - Shorts Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>ClipForge</h1>
+        <p class="subtitle">Generate multi-variant short-video kits: hooks, shot-by-shot scripts, captions, and hashtags.</p>
+      </header>
+
+      <section class="card">
+        <label for="idea">Source text / idea</label>
+        <textarea id="idea" rows="8" placeholder="Paste notes, article snippet, product details, or a topic prompt..."></textarea>
+
+        <div class="controls">
+          <label>
+            Platform
+            <select id="platform">
+              <option value="tiktok">TikTok</option>
+              <option value="reels">Instagram Reels</option>
+              <option value="shorts">YouTube Shorts</option>
+              <option value="linkedin">LinkedIn</option>
+            </select>
+          </label>
+
+          <label>
+            Tone
+            <select id="tone">
+              <option value="energetic">Energetic</option>
+              <option value="educational">Educational</option>
+              <option value="storytelling">Storytelling</option>
+              <option value="professional">Professional</option>
+            </select>
+          </label>
+
+          <label>
+            Duration
+            <select id="duration">
+              <option value="15">15 seconds</option>
+              <option value="30" selected>30 seconds</option>
+              <option value="45">45 seconds</option>
+              <option value="60">60 seconds</option>
+            </select>
+          </label>
+
+          <label>
+            Audience
+            <input id="audience" type="text" placeholder="e.g., Coaches, SMB founders" />
+          </label>
+
+          <label>
+            Primary CTA
+            <input id="cta" type="text" placeholder="e.g., Follow for part 2" />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="generate">Generate 3 Variants</button>
+          <button id="download" class="ghost" type="button">Download JSON</button>
+        </div>
+      </section>
+
+      <section id="output" class="card hidden">
+        <div class="output-head">
+          <h2>Generated Shorts Kit</h2>
+          <button id="copyAll" class="ghost" type="button">Copy all</button>
+        </div>
+
+        <div id="variants" class="variants"></div>
+      </section>
+    </main>
+
+    <template id="variant-template">
+      <article class="variant">
+        <h3 class="variant-title"></h3>
+        <p class="variant-hook"></p>
+
+        <div class="result">
+          <h4>Shot List</h4>
+          <ol class="variant-script"></ol>
+        </div>
+
+        <div class="result">
+          <h4>Caption</h4>
+          <p class="variant-caption"></p>
+        </div>
+
+        <div class="result">
+          <h4>Hashtags</h4>
+          <p class="variant-tags"></p>
+        </div>
+
+        <button class="copy-variant ghost" type="button">Copy variant</button>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
