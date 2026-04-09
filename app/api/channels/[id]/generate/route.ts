@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 
-export async function POST(_: Request, { params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export async function POST(_: Request, { params }: { params: { id: string } }) {
+  const { id } = params;
 
   const channel = await prisma.channel.findUnique({
     where: { id },
